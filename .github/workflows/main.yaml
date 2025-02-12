@@ -1,9 +1,9 @@
 name: SelfHostedRunnerWorkflowDemo1
 
 on:
-  push:
-    branches:
-      - main
+  #push:
+  #  branches:
+  #    - main
   
   workflow_dispatch:
     inputs:
@@ -40,3 +40,10 @@ jobs:
           echo ${{github.event.inputs.test-level || 'Default value'}}
           echo ${{github.actor}}}
           echo ${{github.event_name}}
+          if command -v sf; then
+            echo "sf is installed"
+          else
+            echo "sf is not installed"
+            npm install --global @salesforce/cli
+            sf --version
+          fi  
